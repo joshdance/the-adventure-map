@@ -21,8 +21,8 @@ text{
 }
 #title{font-size:60px;}
 #Total{font-size:60px;}
-#地区 path,
-#地区 rect,
+#region path,
+#region rect,
 polyline{
 	fill-rule:evenodd;
 	clip-rule:evenodd;
@@ -31,25 +31,25 @@ polyline{
 	stroke-linecap:round;
 	stroke-linejoin:round;
 }
-#地区 path,
-#地区 rect{
+#region path,
+#region rect{
 	fill:#FFF;
 	cursor: pointer;
 	pointer-events: auto;
 }
 polyline{fill:none;pointer-events:none;}
-#地区 > *[level="5"]{fill:#FF7E7E;}
-#地区 > *[level="4"]{fill:#FFB57E;}
-#地区 > *[level="3"]{fill:#FFE57E;}
-#地区 > *[level="2"]{fill:#A8FFBE;}
-#地区 > *[level="1"]{fill:#88AEFF;}
-#地区 > *[level="0"][alt="true"]{fill:#d6beff;}
-#地区 > g > *[level="5"]{fill:#FF7E7E;}
-#地区 > g > *[level="4"]{fill:#FFB57E;}
-#地区 > g > *[level="3"]{fill:#FFE57E;}
-#地区 > g > *[level="2"]{fill:#A8FFBE;}
-#地区 > g > *[level="1"]{fill:#88AEFF;}
-#地区 > g > *[level="0"][alt="true"]{fill:#d6beff;}
+#region > *[level="5"]{fill:#FF7E7E;}
+#region > *[level="4"]{fill:#FFB57E;}
+#region > *[level="3"]{fill:#FFE57E;}
+#region > *[level="2"]{fill:#A8FFBE;}
+#region > *[level="1"]{fill:#88AEFF;}
+#region > *[level="0"][alt="true"]{fill:#d6beff;}
+#region > g > *[level="5"]{fill:#FF7E7E;}
+#region > g > *[level="4"]{fill:#FFB57E;}
+#region > g > *[level="3"]{fill:#FFE57E;}
+#region > g > *[level="2"]{fill:#A8FFBE;}
+#region > g > *[level="1"]{fill:#88AEFF;}
+#region > g > *[level="0"][alt="true"]{fill:#d6beff;}
 .level-border{
 	fill-rule:evenodd;
 	clip-rule:evenodd;
@@ -87,7 +87,7 @@ polyline{fill:none;pointer-events:none;}
 	.st23{font-size:12px;}
 </style>
 
-<g id="地区">
+<g id="region">
 	<g id="UK">
 		<path id="UK" class="st0" d="M558.5,616.43V706c0,1.66-1.34,3-3,3H476c-1.66,0-3-1.34-3-3V460.49c0-3.15,4.24-4.17,5.67-1.36
 			l79.5,155.94C558.39,615.49,558.5,615.95,558.5,616.43z"/>
@@ -390,8 +390,8 @@ polyline{fill:none;pointer-events:none;}
 <text id="Total" x="54" y="392">Europe Level 0</text>
 </svg>
 
-<div id="设置等级">
-    <h2>地区</h2>
+<div id="setlevel">
+    <h2>region</h2>
     <a data-level="5">{{ $t("message.data_level_5") }}</a>
     <a data-level="4">{{ $t("message.data_level_4") }}</a>
     <a data-level="3">{{ $t("message.data_level_3") }}</a>
@@ -412,13 +412,13 @@ polyline{fill:none;pointer-events:none;}
 	<a lang="עברית">עברית</a>
 </div>
 <footer>
-	<a id="Reset" class="按钮">Reset</a>
+	<a id="Reset" class="button">Reset</a>
 	<a href="us.html">US ver.</a>
 	<a href="https://github.com/tenpages/us-level" target="_blank">GitHub</a>
-	<a id="Lang" class="按钮">English</a>
-	<a id="保存" class="按钮">Save</a>
+	<a id="Lang" class="button">English</a>
+	<a id="save" class="button">Save</a>
 </footer>
-<div id="输出图像" style="display: none;">
+<div id="outputimage" style="display: none;">
 	<div>
 		<img>
 	</div>
@@ -429,7 +429,7 @@ polyline{fill:none;pointer-events:none;}
 		If no texts, click the button below and try to save again
 	</p>
 	<div>
-		<a class="按钮">Close</a>
+		<a class="button">Close</a>
 	</div>
 </div>
 <script src="https://unpkg.com/vue@3.2.41/dist/vue.global.prod.js"></script>

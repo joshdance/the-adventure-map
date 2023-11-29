@@ -1,12 +1,12 @@
 const 本地存储 = localStorage;
 const 视窗 = window;
 const 文档 = document;
-const 如何做爱元素 = document.documentElement;
-const 头元素 = 文档.head;
-const 新建元素 = 名 => 文档.createElement(名);
+const 如何做爱element = document.documentElement;
+const 头element = 文档.head;
+const 新建element = 名 => 文档.createElement(名);
 const 新建图 = _=> new Image();
-const 添加事件监控 = (元素,事件,回调) => 元素[`on${事件}`] = 回调;// 元素.addEventListener(事件,回调);
-const 获取元素方位 = 元素 => 元素.getBoundingClientRect();
+const 添加事件监控 = (element,事件,callback) => element[`on${事件}`] = callback;// element.addEventListener(事件,callback);
+const 获取element方位 = element => element.getBoundingClientRect();
 const messages = {
     English: {
         message: {
@@ -146,7 +146,7 @@ const messages = {
             data_level_1: '路过',
             data_level_0_alt: '想要去',
             data_level_0: '没去过',
-            pt: '分',
+            pt: 'score',
         },
         country_name: {
             UK: '英国',
@@ -210,7 +210,7 @@ const messages = {
             data_level_1: '路過',
             data_level_0_alt: '想要去',
             data_level_0: '沒去過',
-            pt: '分',
+            pt: 'score',
         },
         country_name: {
             UK: '英國',
@@ -592,162 +592,162 @@ const i18n = VueI18n.createI18n({
     messages,
 })
 const app1 = Vue.createApp().use(i18n).mount("#Layer_4")
-const app2 = Vue.createApp().use(i18n).mount("#设置等级")
+const app2 = Vue.createApp().use(i18n).mount("#setlevel")
 const app3 = Vue.createApp().use(i18n).mount("#Texts")
 
-const 设置等级标题 = 设置等级.children[0];
+const setLevelTitle = setlevel.children[0];
 
-const 颜色 = ['#F9CDC7', '#C5F9CB', '#CDE8F4', '#FDE8C4', '#D0DCD7', '#E1CEF5', '#D6D6D6'];
-const 颜色_randomizer = Math.floor(Math.random() * 7);
-如何做爱元素.style.backgroundColor = 颜色[颜色_randomizer]
-添加事件监控(如何做爱元素,'click',e=>{
+const colors = ['#F9CDC7', '#C5F9CB', '#CDE8F4', '#FDE8C4', '#D0DCD7', '#E1CEF5', '#D6D6D6'];
+const colors_randomizer = Math.floor(Math.random() * 7);
+如何做爱element.style.backgroundColor = colors[colors_randomizer]
+添加事件监控(如何做爱element,'click',e=>{
     if (e.target == 文档.body) {
-        const 颜色a = Math.floor(Math.random() * 50) + 176;
-        const 颜色b = Math.floor(Math.random() * 50) + 176;
-        const 颜色c = Math.floor(Math.random() * 50) + 176;
-        如何做爱元素.style.backgroundColor = '#' + 颜色a.toString(16) + 颜色b.toString(16) + 颜色c.toString(16)
+        const colorsa = Math.floor(Math.random() * 50) + 176;
+        const colorsb = Math.floor(Math.random() * 50) + 176;
+        const colorsc = Math.floor(Math.random() * 50) + 176;
+        如何做爱element.style.backgroundColor = '#' + colorsa.toString(16) + colorsb.toString(16) + colorsc.toString(16)
     }
 })
 
-const 全关闭 = _=>{
-    设置等级样式.display = '';
-    设置语言样式.display = '';
+const closeAll = _=>{
+    setLevelStyle.display = '';
+    setLanguageStyle.display = '';
 };
-const 数据 = {};
-const 获取所有省元素们 = _=>[...地区.children];
-const 获取所有省等级们 = _=>获取所有省元素们().map(el=>+el.getAttribute('level')||0);
-const 本地存储等级们钥匙 = 'eu-levels';
-const 保存等级们 = _=>{
-    let 本地存储value = ""
-    for (const 省元素 of 获取所有省元素们()) {
-        if (省元素.getAttribute('alt') == "true") {
-            本地存储value += '-'
+const data = {};
+const getAllProvinceElements = _=>[...region.children];
+const getAllProvinceLevels = _=>getAllProvinceElements().map(el=>+el.getAttribute('level')||0);
+const localStorageLevelsKey = 'eu-levels';
+const saveLevels = _=>{
+    let localStorageValue = ""
+    for (const provinceElement of getAllProvinceElements()) {
+        if (provinceElement.getAttribute('alt') == "true") {
+            localStorageValue += '-'
         }
-        else 本地存储value += 省元素.getAttribute('level')||0
+        else localStorageValue += provinceElement.getAttribute('level')||0
     }
-    本地存储.setItem(本地存储等级们钥匙,本地存储value);
+    本地存储.setItem(localStorageLevelsKey,localStorageValue);
 };
-const 省等级们正则 = /^[\d|-]{50}$/;
-const 获取等级们并生效 = _=>{
-    let 等级们字串 = 本地存储.getItem(本地存储等级们钥匙);
-    console.log(等级们字串.length)
-    if(/^[\d|-]{49}$/.test(等级们字串)) 等级们字串+='0'; // handling legacy localstorage
-    console.log(等级们字串)
-    if(!省等级们正则.test(等级们字串)) return;
-    const 等级们 = 等级们字串.split('');
-    获取所有省元素们().forEach((元素,下标)=>{
-        元素.setAttribute('level',等级们[下标]=='-'?'0':等级们[下标])
-        if (等级们[下标]=='-') 元素.setAttribute('alt', true);
-        if (元素.nodeName == 'g') {
-            for (const child of 元素.children) {
-                child.setAttribute('level',等级们[下标]=='-'?'0':等级们[下标]);
-                if (等级们[下标]=='-') child.setAttribute('alt', true);
+const provinceLevelsRegex = /^[\d|-]{50}$/;
+const getLevelsAndApply = _=>{
+    let levelsString = 本地存储.getItem(localStorageLevelsKey);
+    console.log(levelsString.length)
+    if(/^[\d|-]{49}$/.test(levelsString)) levelsString+='0'; // handling legacy localstorage
+    console.log(levelsString)
+    if(!provinceLevelsRegex.test(levelsString)) return;
+    const levels = levelsString.split('');
+    getAllProvinceElements().forEach((element,index)=>{
+        element.setAttribute('level',levels[index]=='-'?'0':levels[index])
+        if (levels[index]=='-') element.setAttribute('alt', true);
+        if (element.nodeName == 'g') {
+            for (const child of element.children) {
+                child.setAttribute('level',levels[index]=='-'?'0':levels[index]);
+                if (levels[index]=='-') child.setAttribute('alt', true);
             }
         }
     })
 };
-const 图形 = 文档.querySelector('svg');
-const 设置等级样式 = 设置等级.style;
-const 最小间距 = 6;
-添加事件监控(图形,'click', e=>{
-    全关闭()
+const graphic = 文档.querySelector('svg');
+const setLevelStyle = setlevel.style;
+const minSpacing = 6;
+添加事件监控(graphic,'click', e=>{
+    closeAll()
     e.stopPropagation();
 
-    let { target: 省元素 } = e;
-    if ( 省元素.parentElement.id == 省元素.id ) {
-        省元素 = 省元素.parentElement
+    let { target: provinceElement } = e;
+    if ( provinceElement.parentElement.id == provinceElement.id ) {
+        provinceElement = provinceElement.parentElement
     }
-    const 省元素方位 = 获取元素方位(省元素);
-    const { id } = 省元素;
-    数据.省元素 = 省元素;
-    数据.id = id;
+    const provinceElementPosition = 获取element方位(provinceElement);
+    const { id } = provinceElement;
+    data.provinceElement = provinceElement;
+    data.id = id;
 
-    设置等级标题.innerHTML = messages[Lang.textContent].country_name[id]
-    设置等级样式.display = 'block';
-    const 设置等级元素方位 = 获取元素方位(设置等级);
+    setLevelTitle.innerHTML = messages[Lang.textContent].country_name[id]
+    setLevelStyle.display = 'block';
+    const setLevelElementPosition = 获取element方位(setlevel);
     
-    let 左 = Math.round(省元素方位.left + 省元素方位.width/2 - 设置等级元素方位.width/2);
-    左 = Math.min(
-        左,
-        document.body.offsetWidth - 设置等级元素方位.width - 最小间距
+    let left = Math.round(provinceElementPosition.left + provinceElementPosition.width/2 - setLevelElementPosition.width/2);
+    left = Math.min(
+        left,
+        document.body.offsetWidth - setLevelElementPosition.width - minSpacing
     );
-    左 = Math.max(
-        左,
-        最小间距
-    );
-
-    let 上 = Math.round(省元素方位.top + 省元素方位.height/2 - 设置等级元素方位.height/2);
-    上 = Math.min(
-        上,
-        document.body.offsetHeight - 设置等级元素方位.height - 最小间距
-    );
-    上 = Math.max(
-        上,
-        最小间距
+    left = Math.max(
+        left,
+        minSpacing
     );
 
-    设置等级样式.left = 左 + 'px';
-    设置等级样式.top = 上 + 'px';
+    let top = Math.round(provinceElementPosition.top + provinceElementPosition.height/2 - setLevelElementPosition.height/2);
+    top = Math.min(
+        top,
+        document.body.offsetHeight - setLevelElementPosition.height - minSpacing
+    );
+    top = Math.max(
+        top,
+        minSpacing
+    );
+
+    setLevelStyle.left = left + 'px';
+    setLevelStyle.top = top + 'px';
 });
-添加事件监控(文档,'click',全关闭);
-const 计分 = _=>{
-    const 分 = 获取所有省等级们().reduce((全, 当前) => {
-        return +全 + 当前;
+添加事件监控(文档,'click',closeAll);
+const calculateScore = _=>{
+    const score = getAllProvinceLevels().reduce((total, current) => {
+        return +total + current;
       }, 0);
-    Total.innerHTML = `Europe Level ${分}`;
-    webtitle.innerHTML = `Europe Level ${分}`;
+    Total.innerHTML = `Europe Level ${score}`;
+    webtitle.innerHTML = `Europe Level ${score}`;
 }
-添加事件监控(设置等级,'click',e=>{
+添加事件监控(setlevel,'click',e=>{
     e.stopPropagation();
-    const 等级 = e.target.getAttribute('data-level');
-    if(!等级) return false;
-    if (数据.省元素.nodeName == "g") {
-        for (const child of 数据.省元素.children) {
-            child.setAttribute('level',等级)
+    const level = e.target.getAttribute('data-level');
+    if(!level) return false;
+    if (data.provinceElement.nodeName == "g") {
+        for (const child of data.provinceElement.children) {
+            child.setAttribute('level',level)
         }
     }
-    数据.省元素.setAttribute('level',等级);
+    data.provinceElement.setAttribute('level',level);
     const alt = e.target.hasAttribute('alt');
-    if (数据.省元素.nodeName == "g") {
-        for (const child of 数据.省元素.children) {
+    if (data.provinceElement.nodeName == "g") {
+        for (const child of data.provinceElement.children) {
             if (alt) child.setAttribute('alt',true)
             else child.setAttribute('alt',false);
         }
     }
-    if (alt) 数据.省元素.setAttribute('alt',true)
-    else 数据.省元素.setAttribute('alt',false);
-    全关闭();
-    计分();
-    保存等级们();
+    if (alt) data.provinceElement.setAttribute('alt',true)
+    else data.provinceElement.setAttribute('alt',false);
+    closeAll();
+    calculateScore();
+    saveLevels();
 })
 添加事件监控(Reset,'click',e=>{
-    获取所有省元素们().forEach((元素,下标)=>{
-        元素.setAttribute('level','0')
-        元素.setAttribute('alt', false);
-        if (元素.nodeName == 'g') {
-            for (const child of 元素.children) {
+    getAllProvinceElements().forEach((element,index)=>{
+        element.setAttribute('level','0')
+        element.setAttribute('alt', false);
+        if (element.nodeName == 'g') {
+            for (const child of element.children) {
                 child.setAttribute('level','0');
                 child.setAttribute('alt', false);
             }
         }
     })
-    全关闭();
-    计分();
-    保存等级们();
+    closeAll();
+    calculateScore();
+    saveLevels();
 })
 
-const 语言 = 文档.querySelector('#Lang');
-const 设置语言样式 = Set_Lang.style;
-添加事件监控(语言,'click', e=>{
-    全关闭()
+const language = 文档.querySelector('#Lang');
+const setLanguageStyle = Set_Lang.style;
+添加事件监控(language,'click', e=>{
+    closeAll()
     e.stopPropagation();
 
-    设置语言样式.display = 'block';
-    const 设置语言方位 = 获取元素方位(Set_Lang);
-    const 按钮方位 = 获取元素方位(语言);
-    const 当前语言 = Lang.textContent;
+    setLanguageStyle.display = 'block';
+    const setLanguagePosition = 获取element方位(Set_Lang);
+    const buttonPosition = 获取element方位(language);
+    const currentlanguage = Lang.textContent;
     for (const child of Set_Lang.children) {
-        if ( child.getAttribute('lang') == 当前语言 ) {
+        if ( child.getAttribute('lang') == currentlanguage ) {
             child.style.background = "#aaa";
         }
         else {
@@ -755,127 +755,127 @@ const 设置语言样式 = Set_Lang.style;
         }
     }
     
-    let 左 = Math.round(按钮方位.left + 按钮方位.width/2 - 设置语言方位.width/2);
-    左 = Math.min(
-        左,
-        document.body.offsetWidth - 设置语言方位.width - 最小间距
+    let left = Math.round(buttonPosition.left + buttonPosition.width/2 - setLanguagePosition.width/2);
+    left = Math.min(
+        left,
+        document.body.offsetWidth - setLanguagePosition.width - minSpacing
     );
-    左 = Math.max(
-        左,
-        最小间距
-    );
-
-    let 上 = Math.round(按钮方位.top - 设置语言方位.height - 最小间距);
-    上 = Math.min(
-        上,
-        document.body.offsetHeight - 设置语言方位.height - 最小间距
-    );
-    上 = Math.max(
-        上,
-        最小间距
+    left = Math.max(
+        left,
+        minSpacing
     );
 
-    设置语言样式.left = 左 + 'px';
-    设置语言样式.top = 上 + 'px';
+    let top = Math.round(buttonPosition.top - setLanguagePosition.height - minSpacing);
+    top = Math.min(
+        top,
+        document.body.offsetHeight - setLanguagePosition.height - minSpacing
+    );
+    top = Math.max(
+        top,
+        minSpacing
+    );
+
+    setLanguageStyle.left = left + 'px';
+    setLanguageStyle.top = top + 'px';
 });
-const 更改语言 = (新语言)=>{
-    i18n.global.locale = 新语言
+const changeLanguage = (newLanguage)=>{
+    i18n.global.locale = newLanguage
 }
 添加事件监控(Set_Lang,'click',e=>{
     e.stopPropagation();
-    const 语言 = e.target.getAttribute('lang');
-    if(!语言) return false;
-    Lang.textContent = 语言;
-    全关闭();
-    更改语言(语言);
+    const language = e.target.getAttribute('lang');
+    if(!language) return false;
+    Lang.textContent = language;
+    closeAll();
+    changeLanguage(language);
 })
 
-获取等级们并生效();
-计分();
+getLevelsAndApply();
+calculateScore();
 
-const 读文件成地址 = (原始数据,回调)=>{
-    const 读 = new FileReader();
-    读.onload = e => 回调(e.target.result);
-    读.readAsDataURL(原始数据);
+const readFileAsURL = (originalData,callback)=>{
+    const reader = new FileReader();
+    reader.onload = e => callback(e.target.result);
+    reader.readAsDataURL(originalData);
 };
-const 获取字体数据地址 = (地址,回调)=>{
-    fetch(地址).then(r => r.blob()).then(原始数据 => 读文件成地址(原始数据,回调));
+const getFontDataURL = (url,callback)=>{
+    fetch(url).then(r => r.blob()).then(originalData => readFileAsURL(originalData,callback));
 };
-const 获取字体样式 = (字体名,回调)=>{
-    获取字体数据地址(`${字体名}.woff?v=9`,地址 => 回调(`@font-face {
-        font-family: ${字体名};
-        src: url(${地址});
+const getFontStyle = (fontName,callback)=>{
+    getFontDataURL(`${fontName}.woff?v=9`,url => callback(`@font-face {
+        font-family: ${fontName};
+        src: url(${url});
     };`));
 };
-获取字体样式('slice',样式字串=>{
-    图形.querySelector('style').innerHTML = 样式字串;
-    const 样式元素 = 新建元素('style');
-    样式元素.innerHTML = 样式字串;
-    头元素.appendChild(样式元素);
-    setTimeout(_=>如何做爱元素.removeAttribute('data-loading'),2e3);
+getFontStyle('slice',styleString=>{
+    graphic.querySelector('style').innerHTML = styleString;
+    const styleElement = 新建element('style');
+    styleElement.innerHTML = styleString;
+    头element.appendChild(styleElement);
+    setTimeout(_=>如何做爱element.removeAttribute('data-loading'),2e3);
 });
 
 const 宽 = 1618;
 const 高 = 1249;
 const 比 = 2;
 
-const 画板 = 新建元素('canvas');
+const 画板 = 新建element('canvas');
 
 画板.width = 宽 * 比;
 画板.height = 宽 * 比;
 
-const 上下文 = 画板.getContext('2d');
+const top下文 = 画板.getContext('2d');
 
-const 从文档文本新建图形文件 = 文档文本=>{
-    const 原始数据 = new Blob([文档文本], {type: 'image/svg+xml'});
-    return URL.createObjectURL(原始数据);
+const 从文档文本新建graphic文件 = 文档文本=>{
+    const originalData = new Blob([文档文本], {type: 'image/svg+xml'});
+    return URL.createObjectURL(originalData);
 };
 const 是社交媒体 = /weibo|qq/i.test(navigator.userAgent);
 // alert(navigator.userAgent)
-const 下载文件 = (链接,文件名,元素 = 新建元素('a'))=>{
+const 下载文件 = (链接,文件名,element = 新建element('a'))=>{
     if(!是社交媒体){
-        元素.download = 文件名;
+        element.download = 文件名;
     }
-    元素.href = 链接;
-    元素.click();
+    element.href = 链接;
+    element.click();
 };
-const 地址变图像元素 = (地址,回调)=>{
+const url变图像element = (url,callback)=>{
     const 图 = 新建图();
-    添加事件监控(图,'load',_=>回调(图));
-    图.src = 地址;
+    添加事件监控(图,'load',_=>callback(图));
+    图.src = url;
 };
-const 日志 = _=>(新建图()).src = `https://lab.magiconch.com/api/china-ex/log?levels=${获取所有省等级们().join('')}`;
+const 日志 = _=>(新建图()).src = `https://lab.magiconch.com/api/china-ex/log?levels=${getAllProvinceLevels().join('')}`;
 
-const 保存图像 = _=>{
-    const 文档文本 = `<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${宽} ${高}" width="${宽}px" height="${高}px">${图形.innerHTML}</svg>`;
-    const 数据地址 = 从文档文本新建图形文件(文档文本);
-    地址变图像元素(数据地址,图=>{
-        上下文.fillStyle = 如何做爱元素.style.backgroundColor; //'#b4b4ef';
-        上下文.fillRect(
+const save图像 = _=>{
+    const 文档文本 = `<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${宽} ${高}" width="${宽}px" height="${高}px">${graphic.innerHTML}</svg>`;
+    const dataurl = 从文档文本新建graphic文件(文档文本);
+    url变图像element(dataurl,图=>{
+        top下文.fillStyle = 如何做爱element.style.backgroundColor; //'#b4b4ef';
+        top下文.fillRect(
             0,0,
             宽 * 比,宽 * 比
         );
-        上下文.drawImage(
+        top下文.drawImage(
             图,
             0,0,
             宽,高,
             0,(宽 - 高) * 比 / 2,
             宽 * 比, 高 * 比
         );
-        画板.toBlob(元素数据=>{
-            const 地址 = URL.createObjectURL(元素数据);
-            下载文件(地址,`Europe Level 0.png`);
+        画板.toBlob(elementdata=>{
+            const url = URL.createObjectURL(elementdata);
+            下载文件(url,`Europe Level 0.png`);
 
-            输出图像.style.display = '';
-            输出图像.querySelector('img').src = 地址;
+            outputimage.style.display = '';
+            outputimage.querySelector('img').src = url;
 
         },'image/png');
     });
     日志();
 };
 
-添加事件监控(保存,'click',保存图像);
+添加事件监控(save,'click',save图像);
 
-添加事件监控(输出图像.querySelector('a'),'click',_=>{
-    输出图像.style.display = 'none'
+添加事件监控(outputimage.querySelector('a'),'click',_=>{
+    outputimage.style.display = 'none'
 });
