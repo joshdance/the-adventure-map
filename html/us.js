@@ -1,12 +1,12 @@
-const 本地存储 = localStorage;
-const 视窗 = window;
-const 文档 = document;
-const 如何做爱元素 = document.documentElement;
-const 头元素 = 文档.head;
-const 新建元素 = 名 => 文档.createElement(名);
-const 新建图 = _=> new Image();
+const localStorageSwap = localStorage;
+const windowSwap = window;
+const documentSwap = document;
+const documentElementSwap = document.documentElement;
+const documentHeadSwap = documentSwap.head;
+const createNewElement = name => documentSwap.createElement(name);
+const newImageSwap = _=> new Image();
 const 添加事件监控 = (元素,事件,回调) => 元素[`on${事件}`] = 回调;// 元素.addEventListener(事件,回调);
-const 获取元素方位 = 元素 => 元素.getBoundingClientRect();
+const getBoundingClientRectSwap = 元素 => 元素.getBoundingClientRect();
 const messages = {
     English: {
         message: {
@@ -580,13 +580,13 @@ const app3 = Vue.createApp().use(i18n).mount("#Texts")
 
 const 颜色 = ['#F9CDC7', '#C5F9CB', '#CDE8F4', '#FDE8C4', '#D0DCD7', '#E1CEF5', '#D6D6D6'];
 const 颜色_randomizer = Math.floor(Math.random() * 7);
-如何做爱元素.style.backgroundColor = 颜色[颜色_randomizer]
-添加事件监控(如何做爱元素,'click',e=>{
-    if (e.target == 文档.body) {
+documentElementSwap.style.backgroundColor = 颜色[颜色_randomizer]
+添加事件监控(documentElementSwap,'click',e=>{
+    if (e.target == documentSwap.body) {
         const 颜色a = Math.floor(Math.random() * 50) + 176;
         const 颜色b = Math.floor(Math.random() * 50) + 176;
         const 颜色c = Math.floor(Math.random() * 50) + 176;
-        如何做爱元素.style.backgroundColor = '#' + 颜色a.toString(16) + 颜色b.toString(16) + 颜色c.toString(16)
+        documentElementSwap.style.backgroundColor = '#' + 颜色a.toString(16) + 颜色b.toString(16) + 颜色c.toString(16)
     }
 })
 
@@ -608,11 +608,11 @@ const 保存等级们 = _=>{
         }
         else 本地存储value += 省元素.getAttribute('level')||0
     }
-    本地存储.setItem(本地存储等级们钥匙,本地存储value);
+    localStorageSwap.setItem(本地存储等级们钥匙,本地存储value);
 };
 const 省等级们正则 = /^[\d|-]{56}$/;
 const 获取等级们并生效 = _=>{
-    const 等级们字串 = 本地存储.getItem(本地存储等级们钥匙);
+    const 等级们字串 = localStorageSwap.getItem(本地存储等级们钥匙);
     if(!省等级们正则.test(等级们字串)) return;
     const 等级们 = 等级们字串.split('');
     获取所有省元素们().forEach((元素,下标)=>{
@@ -620,21 +620,21 @@ const 获取等级们并生效 = _=>{
         if (等级们[下标]=='-') 元素.setAttribute('alt', true);
     })
 };
-const 图形 = 文档.querySelector('svg');
+const 图形 = documentSwap.querySelector('svg');
 const 设置等级样式 = 设置等级.style;
 const 最小间距 = 6;
 添加事件监控(图形,'click', e=>{
     e.stopPropagation();
     
     const { target: 省元素 } = e;
-    const 省元素方位 = 获取元素方位(省元素);
+    const 省元素方位 = getBoundingClientRectSwap(省元素);
     const { id } = 省元素;
     数据.省元素 = 省元素;
     数据.id = id;
 
     设置等级标题.innerHTML = messages[Lang.textContent].country_name[id];
     设置等级样式.display = 'block';
-    const 设置等级元素方位 = 获取元素方位(设置等级);
+    const 设置等级元素方位 = getBoundingClientRectSwap(设置等级);
     
     let 左 = Math.round(省元素方位.left + 省元素方位.width/2 - 设置等级元素方位.width/2);
     左 = Math.min(
@@ -659,7 +659,7 @@ const 最小间距 = 6;
     设置等级样式.left = 左 + 'px';
     设置等级样式.top = 上 + 'px';
 });
-添加事件监控(文档,'click',全关闭);
+添加事件监控(documentSwap,'click',全关闭);
 const 计分 = _=>{
     const 分 = 获取所有省等级们().reduce((全, 当前) => {
         return +全 + 当前;
@@ -695,15 +695,15 @@ const 计分 = _=>{
     保存等级们();
 })
 
-const 语言 = 文档.querySelector('#Lang');
+const 语言 = documentSwap.querySelector('#Lang');
 const 设置语言样式 = Set_Lang.style;
 添加事件监控(语言,'click', e=>{
     全关闭()
     e.stopPropagation();
 
     设置语言样式.display = 'block';
-    const 设置语言方位 = 获取元素方位(Set_Lang);
-    const 按钮方位 = 获取元素方位(语言);
+    const 设置语言方位 = getBoundingClientRectSwap(Set_Lang);
+    const 按钮方位 = getBoundingClientRectSwap(语言);
     const 当前语言 = Lang.textContent;
     for (const child of Set_Lang.children) {
         if ( child.getAttribute('lang') == 当前语言 ) {
@@ -768,17 +768,17 @@ const 获取字体样式 = (字体名,回调)=>{
 };
 获取字体样式('slice',样式字串=>{
     图形.querySelector('style').innerHTML = 样式字串;
-    const 样式元素 = 新建元素('style');
+    const 样式元素 = createNewElement('style');
     样式元素.innerHTML = 样式字串;
-    头元素.appendChild(样式元素);
-    setTimeout(_=>如何做爱元素.removeAttribute('data-loading'),2e3);
+    documentHeadSwap.appendChild(样式元素);
+    setTimeout(_=>documentElementSwap.removeAttribute('data-loading'),2e3);
 });
 
 const 宽 = 1150;
 const 高 = 920;
 const 比 = 2;
 
-const 画板 = 新建元素('canvas');
+const 画板 = createNewElement('canvas');
 
 画板.width = 宽 * 比;
 画板.height = 宽 * 比;
@@ -791,7 +791,7 @@ const 从文档文本新建图形文件 = 文档文本=>{
 };
 const 是社交媒体 = /weibo|qq/i.test(navigator.userAgent);
 // alert(navigator.userAgent)
-const 下载文件 = (链接,文件名,元素 = 新建元素('a'))=>{
+const 下载文件 = (链接,文件名,元素 = createNewElement('a'))=>{
     if(!是社交媒体){
         元素.download = 文件名;
     }
@@ -799,17 +799,17 @@ const 下载文件 = (链接,文件名,元素 = 新建元素('a'))=>{
     元素.click();
 };
 const 地址变图像元素 = (地址,回调)=>{
-    const 图 = 新建图();
+    const 图 = newImageSwap();
     添加事件监控(图,'load',_=>回调(图));
     图.src = 地址;
 };
-const 日志 = _=>(新建图()).src = `https://lab.magiconch.com/api/china-ex/log?levels=${获取所有省等级们().join('')}`;
+const 日志 = _=>(newImageSwap()).src = `https://lab.magiconch.com/api/china-ex/log?levels=${获取所有省等级们().join('')}`;
 
 const 保存图像 = _=>{
     const 文档文本 = `<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${宽} ${高}" width="${宽}px" height="${高}px">${图形.innerHTML}</svg>`;
     const 数据地址 = 从文档文本新建图形文件(文档文本);
     地址变图像元素(数据地址,图=>{
-        上下文.fillStyle = 如何做爱元素.style.backgroundColor; //'#b4b4ef';
+        上下文.fillStyle = documentElementSwap.style.backgroundColor; //'#b4b4ef';
         上下文.fillRect(
             0,0,
             宽 * 比,宽 * 比
