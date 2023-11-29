@@ -591,7 +591,7 @@ const i18n = VueI18n.createI18n({
     fallbackLocale: 'English',
     messages,
 })
-const app1 = Vue.createApp().use(i18n).mount("#Layer_4")
+const app1 = Vue.createApp().use(i18n).mount("#ScoringLegend")
 const app2 = Vue.createApp().use(i18n).mount("#setlevel")
 const app3 = Vue.createApp().use(i18n).mount("#Texts")
 
