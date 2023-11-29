@@ -1,11 +1,11 @@
 # Adventure Map
 Mark where you have been and where you want to go!
 
-US
-Europe
-Africa - coming soon
-Americas - coming soon
-Asia - coming soon
+- US
+- Europe
+- Africa - coming soon
+- Americas - coming soon
+- Asia - coming soon
 
 ## How to use
 
